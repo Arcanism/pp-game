@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>RPG</title>
+
+<style>
+    
+    .character {
+        position: absolute;
+        height: 5vmin;
+        width: 5vmin;
+        left: 0vmin;
+        top: 0vmin;
+        background-image: url('smile.png');
+        background-size: 100% 100%;
+    }
+
+    .character.sad {background-image: url('sad.png');}
+    
+    .floor {
+        position: absolute;
+        height: 100vmin;
+        width: 100vmin;
+    }
+    .end {
+        background-color: black;
+    }
+    .tile {
+        position: absolute;
+        height: 5vmin; 
+        width: 5vmin; 
+        background-size: 100% 100%;
+    }
+    .tile.home {background-color: #0088ff}
+    .tile.grass {background-image: url('grass.png');}
+    .tile.stone {background-image: url('stone.png');}
+    .tile.water {background-image: url('water.png');}
+    .tile.stairs {background-image: url('stairs.png');}
+    .tile.wall {background-image: url('wall.png')}
+    .tile.lock {background-image: url('locked.png')}
+    .tile.unlock {background-image: url('unlocked.png')}
+
+    
+
+    .tile.enemy-0 {background-image: url('sad.png');}
+    .tile.enemy-1 {background-image: url('angry.png');}
+    .tile.enemy-2 {background-image: url('angry.png');}
+    .tile.enemy-3 {background-image: url('angry.png');}
+    .tile.enemy-4 {background-image: url('angry.png');}
+
+    .tile.key-1 {background-image: url('weapon.png');}
+
+    .defeated {background-image: url('defeated.png')}
+</style>
+
+<body style="background-color: #000000">
+
+    <div class="end" style="top: 0vmin; left: -5vmin" id="end"></div>
+    <div style="top: -5vmin; left: -5vmin; visibility: hidden;" id="0en" data-position="1000enm"></div>
+    
+    <div class="floor" style="top: 0vmin; left: 0vmin;" id="container">
+    <div class="floor" style="top: 0vmin; left: 0vmin; visibility: visible;" id="1fl" data-tag="a">
+
+       <div class="tile home" style="top: 0vmin; left: 0vmin;" id="1a"></div>
+       <div class="tile home" style="top: 0vmin; left: 5vmin;" id="2a"></div>
+       <div class="tile home" style="top: 0vmin; left: 10vmin;" id="3a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 15vmin;" id="4a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 20vmin;" id="5a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 25vmin;" id="6a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 30vmin;" id="7a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 35vmin;" id="8a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 40vmin;" id="9a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 45vmin;" id="10a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 50vmin;" id="11a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 55vmin;" id="12a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 60vmin;" id="13a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 65vmin;" id="14a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 70vmin;" id="15a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 75vmin;" id="16a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 80vmin;" id="17a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 85vmin;" id="18a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 90vmin;" id="19a"></div>
+       <div class="tile wall" style="top: 0vmin; left: 95vmin;" id="20a"></div> 
+ 
+       <div class="tile home" style="top: 5vmin; left: 0vmin;" id="21a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 5vmin;" id="22a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 10vmin;" id="23a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 15vmin;" id="24a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 20vmin;" id="25a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 25vmin;" id="26a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 30vmin;" id="27a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 35vmin;" id="28a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 40vmin;" id="29a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 45vmin;" id="30a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 50vmin;" id="31a"></div>
+       <div class="tile wall" style="top: 5vmin; left: 55vmin;" id="32a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 60vmin;" id="33a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 65vmin;" id="34a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 70vmin;" id="35a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 75vmin;" id="36a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 80vmin;" id="37a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 85vmin;" id="38a"></div>
+       <div class="tile grass" style="top: 5vmin; left: 90vmin;" id="39a"></div>
+       <div class="tile wall" style="top: 5vmin; left: 95vmin;" id="40a"></div>   
+ 
+       <div class="tile home" style="top: 10vmin; left: 0vmin;" id="41a"></div>
+       <div class="tile grass" style="top: 10vmin; left: 5vmin;" id="42a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 10vmin;" id="43a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 15vmin;" id="44a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 20vmin;" id="45a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 25vmin;" id="46a"></div>
+       <div class="tile grass" style="top: 10vmin; left: 30vmin;" id="47a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 35vmin;" id="48a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 40vmin;" id="49a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 45vmin;" id="50a"></div>
+       <div class="tile grass" style="top: 10vmin; left: 50vmin;" id="51a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 55vmin;" id="52a"></div>
+       <div class="tile grass" style="top: 10vmin; left: 60vmin;" id="53a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 65vmin;" id="54a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 70vmin;" id="55a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 75vmin;" id="56a"></div>
+       <div class="tile grass" style="top: 10vmin; left: 80vmin;" id="57a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 85vmin;" id="58a"></div>
+       <div class="tile grass" style="top: 10vmin; left: 90vmin;" id="59a"></div>
+       <div class="tile wall" style="top: 10vmin; left: 95vmin;" id="60a"></div>   
+ 
+       <div class="tile wall" style="top: 15vmin; left: 0vmin;" id="61a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 5vmin;" id="62a"></div>
+       <div class="tile wall" style="top: 15vmin; left: 10vmin;" id="63a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 15vmin;" id="64a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 20vmin;" id="65a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 25vmin;" id="66a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 30vmin;" id="67a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 35vmin;" id="68a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 40vmin;" id="69a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 45vmin;" id="70a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 50vmin;" id="71a"></div>
+       <div class="tile wall" style="top: 15vmin; left: 55vmin;" id="72a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 60vmin;" id="73a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 65vmin;" id="74a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 70vmin;" id="75a"></div>
+       <div class="tile wall" style="top: 15vmin; left: 75vmin;" id="76a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 80vmin;" id="77a"></div>
+       <div class="tile wall" style="top: 15vmin; left: 85vmin;" id="78a"></div>
+       <div class="tile grass" style="top: 15vmin; left: 90vmin;" id="79a"></div>
+       <div class="tile wall" style="top: 15vmin; left: 95vmin;" id="80a"></div>   
+ 
+       <div class="tile wall" style="top: 20vmin; left: 0vmin;" id="81a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 5vmin;" id="82a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 10vmin;" id="83a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 15vmin;" id="84a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 20vmin;" id="85a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 25vmin;" id="86a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 30vmin;" id="87a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 35vmin;" id="88a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 40vmin;" id="89a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 45vmin;" id="90a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 50vmin;" id="91a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 55vmin;" id="92a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 60vmin;" id="93a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 65vmin;" id="94a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 70vmin;" id="95a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 75vmin;" id="96a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 80vmin;" id="97a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 85vmin;" id="98a"></div>
+       <div class="tile grass" style="top: 20vmin; left: 90vmin;" id="99a"></div>
+       <div class="tile wall" style="top: 20vmin; left: 95vmin;" id="100a"></div>   
+ 
+       <div class="tile wall" style="top: 25vmin; left: 0vmin;" id="101a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 5vmin;" id="102a"></div>
+       <div class="tile wall" style="top: 25vmin; left: 10vmin;" id="103a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 15vmin;" id="104a"></div>
+       <div class="tile wall" style="top: 25vmin; left: 20vmin;" id="105a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 25vmin;" id="106a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 30vmin;" id="107a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 35vmin;" id="108a"></div>
+       <div class="tile wall" style="top: 25vmin; left: 40vmin;" id="109a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 45vmin;" id="110a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 50vmin;" id="111a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 55vmin;" id="112a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 60vmin;" id="113a"></div>
+       <div class="tile wall" style="top: 25vmin; left: 65vmin;" id="114a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 70vmin;" id="115a"></div>
+       <div class="tile wall" style="top: 25vmin; left: 75vmin;" id="116a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 80vmin;" id="117a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 85vmin;" id="118a"></div>
+       <div class="tile grass" style="top: 25vmin; left: 90vmin;" id="119a"></div>
+       <div class="tile wall" style="top: 25vmin; left: 95vmin;" id="120a"></div>
+      
+       <div class="tile wall" style="top: 30vmin; left: 0vmin;" id="121a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 5vmin;" id="122a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 10vmin;" id="123a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 15vmin;" id="124a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 20vmin;" id="125a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 25vmin;" id="126a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 30vmin;" id="127a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 35vmin;" id="128a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 40vmin;" id="129a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 45vmin;" id="130a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 50vmin;" id="131a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 55vmin;" id="132a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 60vmin;" id="133a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 65vmin;" id="134a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 70vmin;" id="135a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 75vmin;" id="136a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 80vmin;" id="137a"></div>
+       <div class="tile grass" style="top: 30vmin; left: 85vmin;" id="138a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 90vmin;" id="139a"></div>
+       <div class="tile wall" style="top: 30vmin; left: 95vmin;" id="140a"></div>
+ 
+       <div class="tile wall" style="top: 35vmin; left: 0vmin;" id="141a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 5vmin;" id="142a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 10vmin;" id="143a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 15vmin;" id="144a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 20vmin;" id="145a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 25vmin;" id="146a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 30vmin;" id="147a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 35vmin;" id="148a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 40vmin;" id="149a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 45vmin;" id="150a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 50vmin;" id="151a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 55vmin;" id="152a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 60vmin;" id="153a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 65vmin;" id="154a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 70vmin;" id="155a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 75vmin;" id="156a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 80vmin;" id="157a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 85vmin;" id="158a"></div>
+       <div class="tile grass" style="top: 35vmin; left: 90vmin;" id="159a"></div>
+       <div class="tile wall" style="top: 35vmin; left: 95vmin;" id="160a"></div>
+ 
+       <div class="tile wall" style="top: 40vmin; left: 0vmin;" id="161a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 5vmin;" id="162a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 10vmin;" id="163a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 15vmin;" id="164a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 20vmin;" id="165a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 25vmin;" id="166a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 30vmin;" id="167a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 35vmin;" id="168a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 40vmin;" id="169a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 45vmin;" id="170a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 50vmin;" id="171a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 55vmin;" id="172a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 60vmin;" id="173a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 65vmin;" id="174a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 70vmin;" id="175a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 75vmin;" id="176a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 80vmin;" id="177a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 85vmin;" id="178a"></div>
+       <div class="tile grass" style="top: 40vmin; left: 90vmin;" id="179a"></div>
+       <div class="tile wall" style="top: 40vmin; left: 95vmin;" id="180a"></div>
+ 
+       <div class="tile wall" style="top: 45vmin; left: 0vmin;" id="181a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 5vmin;" id="182a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 10vmin;" id="183a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 15vmin;" id="184a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 20vmin;" id="185a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 25vmin;" id="186a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 30vmin;" id="187a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 35vmin;" id="188a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 40vmin;" id="189a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 45vmin;" id="190a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 50vmin;" id="191a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 55vmin;" id="192a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 60vmin;" id="193a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 65vmin;" id="194a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 70vmin;" id="195a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 75vmin;" id="196a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 80vmin;" id="197a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 85vmin;" id="198a"></div>
+       <div class="tile grass" style="top: 45vmin; left: 90vmin;" id="199a"></div>
+       <div class="tile wall" style="top: 45vmin; left: 95vmin;" id="200a"></div>
+ 
+       <div class="tile wall" style="top: 50vmin; left: 0vmin;" id="201a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 5vmin;" id="202a"></div>
+       <div class="tile wall" style="top: 50vmin; left: 10vmin;" id="203a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 15vmin;" id="204a"></div>
+       <div class="tile wall" style="top: 50vmin; left: 20vmin;" id="205a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 25vmin;" id="206a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 30vmin;" id="207a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 35vmin;" id="208a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 40vmin;" id="209a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 45vmin;" id="210a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 50vmin;" id="211a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 55vmin;" id="212a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 60vmin;" id="213a"></div>
+       <div class="tile wall" style="top: 50vmin; left: 65vmin;" id="214a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 70vmin;" id="215a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 75vmin;" id="216a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 80vmin;" id="217a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 85vmin;" id="218a"></div>
+       <div class="tile grass" style="top: 50vmin; left: 90vmin;" id="219a"></div>
+       <div class="tile wall" style="top: 50vmin; left: 95vmin;" id="220a"></div>
+ 
+       <div class="tile wall" style="top: 55vmin; left: 0vmin;" id="221a"></div>
+       <div class="tile grass" style="top: 55vmin; left: 5vmin;" id="222a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 10vmin;" id="223a"></div>
+       <div class="tile grass" style="top: 55vmin; left: 15vmin;" id="224a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 20vmin;" id="225a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 25vmin;" id="226a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 30vmin;" id="227a"></div>
+       <div class="tile grass" style="top: 55vmin; left: 35vmin;" id="228a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 40vmin;" id="229a"></div>
+       <div class="tile grass" style="top: 55vmin; left: 45vmin;" id="230a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 50vmin;" id="231a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 55vmin;" id="232a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 60vmin;" id="233a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 65vmin;" id="234a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 70vmin;" id="235a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 75vmin;" id="236a"></div>
+       <div class="tile grass" style="top: 55vmin; left: 80vmin;" id="237a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 85vmin;" id="238a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 90vmin;" id="239a"></div>
+       <div class="tile wall" style="top: 55vmin; left: 95vmin;" id="240a"></div>
+ 
+       <div class="tile wall" style="top: 60vmin; left: 0vmin;" id="241a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 5vmin;" id="242a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 10vmin;" id="243a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 15vmin;" id="244a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 20vmin;" id="245a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 25vmin;" id="246a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 30vmin;" id="247a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 35vmin;" id="248a"></div>
+       <div class="tile wall" style="top: 60vmin; left: 40vmin;" id="249a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 45vmin;" id="250a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 50vmin;" id="251a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 55vmin;" id="252a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 60vmin;" id="253a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 65vmin;" id="254a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 70vmin;" id="255a"></div>
+       <div class="tile wall" style="top: 60vmin; left: 75vmin;" id="256a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 80vmin;" id="257a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 85vmin;" id="258a"></div>
+       <div class="tile grass" style="top: 60vmin; left: 90vmin;" id="259a"></div>
+       <div class="tile wall" style="top: 60vmin; left: 95vmin;" id="260a"></div>
+ 
+       <div class="tile wall" style="top: 65vmin; left: 0vmin;" id="261a"></div>
+       <div class="tile grass" style="top: 65vmin; left: 5vmin;" id="262a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 10vmin;" id="263a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 15vmin;" id="264a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 20vmin;" id="265a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 25vmin;" id="266a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 30vmin;" id="267a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 35vmin;" id="268a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 40vmin;" id="269a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 45vmin;" id="270a"></div>
+       <div class="tile grass" style="top: 65vmin; left: 50vmin;" id="271a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 55vmin;" id="272a"></div>
+       <div class="tile grass" style="top: 65vmin; left: 60vmin;" id="273a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 65vmin;" id="274a"></div>
+       <div class="tile grass" style="top: 65vmin; left: 70vmin;" id="275a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 75vmin;" id="276a"></div>
+       <div class="tile grass" style="top: 65vmin; left: 80vmin;" id="277a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 85vmin;" id="278a"></div>
+       <div class="tile grass" style="top: 65vmin; left: 90vmin;" id="279a"></div>
+       <div class="tile wall" style="top: 65vmin; left: 95vmin;" id="280a"></div>
+ 
+       <div class="tile wall" style="top: 70vmin; left: 0vmin;" id="281a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 5vmin;" id="282a"></div>
+       <div class="tile wall" style="top: 70vmin; left: 10vmin;" id="283a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 15vmin;" id="284a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 20vmin;" id="285a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 25vmin;" id="286a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 30vmin;" id="287a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 35vmin;" id="288a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 40vmin;" id="289a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 45vmin;" id="290a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 50vmin;" id="291a"></div>
+       <div class="tile wall" style="top: 70vmin; left: 55vmin;" id="292a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 60vmin;" id="293a"></div>
+       <div class="tile wall" style="top: 70vmin; left: 65vmin;" id="294a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 70vmin;" id="295a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 75vmin;" id="296a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 80vmin;" id="297a"></div>
+       <div class="tile wall" style="top: 70vmin; left: 85vmin;" id="298a"></div>
+       <div class="tile grass" style="top: 70vmin; left: 90vmin;" id="299a"></div>
+       <div class="tile wall" style="top: 70vmin; left: 95vmin;" id="300a"></div>
+ 
+       <div class="tile wall" style="top: 75vmin; left: 0vmin;" id="301a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 5vmin;" id="302a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 10vmin;" id="303a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 15vmin;" id="304a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 20vmin;" id="305a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 25vmin;" id="306a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 30vmin;" id="307a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 35vmin;" id="308a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 40vmin;" id="309a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 45vmin;" id="310a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 50vmin;" id="311a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 55vmin;" id="312a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 60vmin;" id="313a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 65vmin;" id="314a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 70vmin;" id="315a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 75vmin;" id="316a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 80vmin;" id="317a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 85vmin;" id="318a"></div>
+       <div class="tile grass" style="top: 75vmin; left: 90vmin;" id="319a"></div>
+       <div class="tile wall" style="top: 75vmin; left: 95vmin;" id="320a"></div>
+      
+       <div class="tile wall" style="top: 80vmin; left: 0vmin;" id="321a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 5vmin;" id="322a"></div>
+       <div class="tile wall" style="top: 80vmin; left: 10vmin;" id="323a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 15vmin;" id="324a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 20vmin;" id="325a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 25vmin;" id="326a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 30vmin;" id="327a"></div>
+       <div class="tile wall" style="top: 80vmin; left: 35vmin;" id="328a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 40vmin;" id="329a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 45vmin;" id="330a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 50vmin;" id="331a"></div>
+       <div class="tile wall" style="top: 80vmin; left: 55vmin;" id="332a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 60vmin;" id="333a"></div>
+       <div class="tile wall" style="top: 80vmin; left: 65vmin;" id="334a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 70vmin;" id="335a"></div>
+       <div class="tile wall" style="top: 80vmin; left: 75vmin;" id="336a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 80vmin;" id="337a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 85vmin;" id="338a"></div>
+       <div class="tile grass" style="top: 80vmin; left: 90vmin;" id="339a"></div>
+       <div class="tile wall" style="top: 80vmin; left: 95vmin;" id="340a"></div>
+ 
+       <div class="tile wall" style="top: 85vmin; left: 0vmin;" id="341a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 5vmin;" id="342a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 10vmin;" id="343a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 15vmin;" id="344a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 20vmin;" id="345a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 25vmin;" id="346a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 30vmin;" id="347a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 35vmin;" id="348a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 40vmin;" id="349a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 45vmin;" id="350a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 50vmin;" id="351a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 55vmin;" id="352a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 60vmin;" id="353a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 65vmin;" id="354a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 70vmin;" id="355a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 75vmin;" id="356a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 80vmin;" id="357a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 85vmin;" id="358a"></div>
+       <div class="tile grass" style="top: 85vmin; left: 90vmin;" id="359a"></div>
+       <div class="tile wall" style="top: 85vmin; left: 95vmin;" id="360a"></div>
+ 
+       <div class="tile wall" style="top: 90vmin; left: 0vmin;" id="361a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 5vmin;" id="362a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 10vmin;" id="363a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 15vmin;" id="364a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 20vmin;" id="365a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 25vmin;" id="366a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 30vmin;" id="367a"></div>
+       <div class="tile wall" style="top: 90vmin; left: 35vmin;" id="368a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 40vmin;" id="369a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 45vmin;" id="370a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 50vmin;" id="371a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 55vmin;" id="372a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 60vmin;" id="373a"></div>
+       <div class="tile wall" style="top: 90vmin; left: 65vmin;" id="374a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 70vmin;" id="375a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 75vmin;" id="376a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 80vmin;" id="377a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 85vmin;" id="378a"></div>
+       <div class="tile grass" style="top: 90vmin; left: 90vmin;" id="379a"></div>
+       <div class="tile wall" style="top: 90vmin; left: 95vmin;" id="380a"></div>
+ 
+       <div class="tile wall" style="top: 95vmin; left: 0vmin;" id="381a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 5vmin;" id="382a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 10vmin;" id="383a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 15vmin;" id="384a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 20vmin;" id="385a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 25vmin;" id="386a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 30vmin;" id="387a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 35vmin;" id="388a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 40vmin;" id="389a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 45vmin;" id="390a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 50vmin;" id="391a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 55vmin;" id="392a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 60vmin;" id="393a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 65vmin;" id="394a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 70vmin;" id="395a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 75vmin;" id="396a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 80vmin;" id="397a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 85vmin;" id="398a"></div>
+       <div class="tile wall" style="top: 95vmin; left: 90vmin;" id="399a"></div>
+       <div class="tile stairs" style="top: 95vmin; left: 95vmin;" id="400a"></div>
+
+       <div class="tile key-1" style="top: 5vmin; left: 10vmin;" id="1key" data-position="23ke" data-floor="1fl"></div>
+       <div class="tile key-1" style="top: 90vmin; left: 10vmin;" id="2key" data-position="363ke" data-floor="1fl"></div>
+       <div class="tile key-1" style="top: 10vmin; left: 90vmin;" id="3key" data-position="59ke" data-floor="1fl"></div>
+       <div class="tile key-1" style="top: 80vmin; left: 90vmin;" id="4key" data-position="339ke" data-floor="1fl"></div>
+
+       <div class="tile enemy-1" style="top: 5vmin; left: 10vmin;" id="1en" data-position="23enm" data-floor="1fl"></div>
+       <div class="tile enemy-2" style="top: 90vmin; left: 10vmin;" id="2en" data-position="363enm" data-floor="1fl"></div>
+       <div class="tile enemy-3" style="top: 10vmin; left: 90vmin;" id="3en" data-position="59enm" data-floor="1fl"></div>
+       <div class="tile enemy-4" style="top: 80vmin; left: 90vmin;" id="4en" data-position="339enm" data-floor="1fl"></div>
+
+    </div>
+
+    <div class="floor" style="top: 0vmin; left: 0vmin; visibility: hidden;" id="2fl" data-tag="b">
+          
+        <div class="tile home" style="top: 0vmin; left: 0vmin;" id="1b"></div>
+       <div class="tile home" style="top: 0vmin; left: 5vmin;" id="2b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 10vmin;" id="3b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 15vmin;" id="4b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 20vmin;" id="5b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 25vmin;" id="6b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 30vmin;" id="7b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 35vmin;" id="8b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 40vmin;" id="9b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 45vmin;" id="10b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 50vmin;" id="11b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 55vmin;" id="12b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 60vmin;" id="13b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 65vmin;" id="14b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 70vmin;" id="15b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 75vmin;" id="16b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 80vmin;" id="17b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 85vmin;" id="18b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 90vmin;" id="19b"></div>
+       <div class="tile wall" style="top: 0vmin; left: 95vmin;" id="20b"></div> 
+ 
+       <div class="tile home" style="top: 5vmin; left: 0vmin;" id="21b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 5vmin;" id="22b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 10vmin;" id="23b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 15vmin;" id="24b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 20vmin;" id="25b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 25vmin;" id="26b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 30vmin;" id="27b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 35vmin;" id="28b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 40vmin;" id="29b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 45vmin;" id="30b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 50vmin;" id="31b"></div>
+       <div class="tile wall" style="top: 5vmin; left: 55vmin;" id="32b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 60vmin;" id="33b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 65vmin;" id="34b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 70vmin;" id="35b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 75vmin;" id="36b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 80vmin;" id="37b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 85vmin;" id="38b"></div>
+       <div class="tile grass" style="top: 5vmin; left: 90vmin;" id="39b"></div>
+       <div class="tile wall" style="top: 5vmin; left: 95vmin;" id="40b"></div>   
+ 
+       <div class="tile wall" style="top: 10vmin; left: 0vmin;" id="41b"></div>
+       <div class="tile grass" style="top: 10vmin; left: 5vmin;" id="42b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 10vmin;" id="43b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 15vmin;" id="44b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 20vmin;" id="45b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 25vmin;" id="46b"></div>
+       <div class="tile grass" style="top: 10vmin; left: 30vmin;" id="47b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 35vmin;" id="48b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 40vmin;" id="49b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 45vmin;" id="50b"></div>
+       <div class="tile grass" style="top: 10vmin; left: 50vmin;" id="51b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 55vmin;" id="52b"></div>
+       <div class="tile grass" style="top: 10vmin; left: 60vmin;" id="53b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 65vmin;" id="54b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 70vmin;" id="55b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 75vmin;" id="56b"></div>
+       <div class="tile grass" style="top: 10vmin; left: 80vmin;" id="57b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 85vmin;" id="58b"></div>
+       <div class="tile grass" style="top: 10vmin; left: 90vmin;" id="59b"></div>
+       <div class="tile wall" style="top: 10vmin; left: 95vmin;" id="60b"></div>   
+ 
+       <div class="tile wall" style="top: 15vmin; left: 0vmin;" id="61b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 5vmin;" id="62b"></div>
+       <div class="tile wall" style="top: 15vmin; left: 10vmin;" id="63b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 15vmin;" id="64b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 20vmin;" id="65b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 25vmin;" id="66b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 30vmin;" id="67b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 35vmin;" id="68b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 40vmin;" id="69b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 45vmin;" id="70b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 50vmin;" id="71b"></div>
+       <div class="tile wall" style="top: 15vmin; left: 55vmin;" id="72b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 60vmin;" id="73b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 65vmin;" id="74b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 70vmin;" id="75b"></div>
+       <div class="tile wall" style="top: 15vmin; left: 75vmin;" id="76b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 80vmin;" id="77b"></div>
+       <div class="tile wall" style="top: 15vmin; left: 85vmin;" id="78b"></div>
+       <div class="tile grass" style="top: 15vmin; left: 90vmin;" id="79b"></div>
+       <div class="tile wall" style="top: 15vmin; left: 95vmin;" id="80b"></div>   
+ 
+       <div class="tile wall" style="top: 20vmin; left: 0vmin;" id="81b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 5vmin;" id="82b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 10vmin;" id="83b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 15vmin;" id="84b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 20vmin;" id="85b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 25vmin;" id="86b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 30vmin;" id="87b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 35vmin;" id="88b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 40vmin;" id="89b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 45vmin;" id="90b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 50vmin;" id="91b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 55vmin;" id="92b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 60vmin;" id="93b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 65vmin;" id="94b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 70vmin;" id="95b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 75vmin;" id="96b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 80vmin;" id="97b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 85vmin;" id="98b"></div>
+       <div class="tile grass" style="top: 20vmin; left: 90vmin;" id="99b"></div>
+       <div class="tile wall" style="top: 20vmin; left: 95vmin;" id="100b"></div>   
+ 
+       <div class="tile wall" style="top: 25vmin; left: 0vmin;" id="101b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 5vmin;" id="102b"></div>
+       <div class="tile wall" style="top: 25vmin; left: 10vmin;" id="103b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 15vmin;" id="104b"></div>
+       <div class="tile wall" style="top: 25vmin; left: 20vmin;" id="105b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 25vmin;" id="106b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 30vmin;" id="107b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 35vmin;" id="108b"></div>
+       <div class="tile wall" style="top: 25vmin; left: 40vmin;" id="109b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 45vmin;" id="110b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 50vmin;" id="111b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 55vmin;" id="112b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 60vmin;" id="113b"></div>
+       <div class="tile wall" style="top: 25vmin; left: 65vmin;" id="114b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 70vmin;" id="115b"></div>
+       <div class="tile wall" style="top: 25vmin; left: 75vmin;" id="116b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 80vmin;" id="117b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 85vmin;" id="118b"></div>
+       <div class="tile grass" style="top: 25vmin; left: 90vmin;" id="119b"></div>
+       <div class="tile wall" style="top: 25vmin; left: 95vmin;" id="120b"></div>
+      
+       <div class="tile wall" style="top: 30vmin; left: 0vmin;" id="121b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 5vmin;" id="122b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 10vmin;" id="123b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 15vmin;" id="124b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 20vmin;" id="125b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 25vmin;" id="126b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 30vmin;" id="127b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 35vmin;" id="128b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 40vmin;" id="129b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 45vmin;" id="130b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 50vmin;" id="131b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 55vmin;" id="132b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 60vmin;" id="133b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 65vmin;" id="134b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 70vmin;" id="135b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 75vmin;" id="136b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 80vmin;" id="137b"></div>
+       <div class="tile grass" style="top: 30vmin; left: 85vmin;" id="138b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 90vmin;" id="139b"></div>
+       <div class="tile wall" style="top: 30vmin; left: 95vmin;" id="140b"></div>
+ 
+       <div class="tile wall" style="top: 35vmin; left: 0vmin;" id="141b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 5vmin;" id="142b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 10vmin;" id="143b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 15vmin;" id="144b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 20vmin;" id="145b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 25vmin;" id="146b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 30vmin;" id="147b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 35vmin;" id="148b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 40vmin;" id="149b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 45vmin;" id="150b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 50vmin;" id="151b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 55vmin;" id="152b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 60vmin;" id="153b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 65vmin;" id="154b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 70vmin;" id="155b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 75vmin;" id="156b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 80vmin;" id="157b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 85vmin;" id="158b"></div>
+       <div class="tile grass" style="top: 35vmin; left: 90vmin;" id="159b"></div>
+       <div class="tile wall" style="top: 35vmin; left: 95vmin;" id="160b"></div>
+ 
+       <div class="tile wall" style="top: 40vmin; left: 0vmin;" id="161b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 5vmin;" id="162b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 10vmin;" id="163b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 15vmin;" id="164b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 20vmin;" id="165b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 25vmin;" id="166b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 30vmin;" id="167b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 35vmin;" id="168b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 40vmin;" id="169b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 45vmin;" id="170b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 50vmin;" id="171b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 55vmin;" id="172b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 60vmin;" id="173b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 65vmin;" id="174b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 70vmin;" id="175b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 75vmin;" id="176b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 80vmin;" id="177b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 85vmin;" id="178b"></div>
+       <div class="tile grass" style="top: 40vmin; left: 90vmin;" id="179b"></div>
+       <div class="tile wall" style="top: 40vmin; left: 95vmin;" id="180b"></div>
+ 
+       <div class="tile wall" style="top: 45vmin; left: 0vmin;" id="181b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 5vmin;" id="182b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 10vmin;" id="183b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 15vmin;" id="184b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 20vmin;" id="185b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 25vmin;" id="186b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 30vmin;" id="187b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 35vmin;" id="188b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 40vmin;" id="189b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 45vmin;" id="190b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 50vmin;" id="191b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 55vmin;" id="192b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 60vmin;" id="193b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 65vmin;" id="194b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 70vmin;" id="195b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 75vmin;" id="196b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 80vmin;" id="197b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 85vmin;" id="198b"></div>
+       <div class="tile grass" style="top: 45vmin; left: 90vmin;" id="199b"></div>
+       <div class="tile wall" style="top: 45vmin; left: 95vmin;" id="200b"></div>
+ 
+       <div class="tile wall" style="top: 50vmin; left: 0vmin;" id="201b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 5vmin;" id="202b"></div>
+       <div class="tile wall" style="top: 50vmin; left: 10vmin;" id="203b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 15vmin;" id="204b"></div>
+       <div class="tile wall" style="top: 50vmin; left: 20vmin;" id="205b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 25vmin;" id="206b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 30vmin;" id="207b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 35vmin;" id="208b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 40vmin;" id="209b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 45vmin;" id="210b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 50vmin;" id="211b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 55vmin;" id="212b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 60vmin;" id="213b"></div>
+       <div class="tile wall" style="top: 50vmin; left: 65vmin;" id="214b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 70vmin;" id="215b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 75vmin;" id="216b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 80vmin;" id="217b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 85vmin;" id="218b"></div>
+       <div class="tile grass" style="top: 50vmin; left: 90vmin;" id="219b"></div>
+       <div class="tile wall" style="top: 50vmin; left: 95vmin;" id="220b"></div>
+ 
+       <div class="tile wall" style="top: 55vmin; left: 0vmin;" id="221b"></div>
+       <div class="tile grass" style="top: 55vmin; left: 5vmin;" id="222b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 10vmin;" id="223b"></div>
+       <div class="tile grass" style="top: 55vmin; left: 15vmin;" id="224b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 20vmin;" id="225b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 25vmin;" id="226b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 30vmin;" id="227b"></div>
+       <div class="tile grass" style="top: 55vmin; left: 35vmin;" id="228b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 40vmin;" id="229b"></div>
+       <div class="tile grass" style="top: 55vmin; left: 45vmin;" id="230b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 50vmin;" id="231b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 55vmin;" id="232b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 60vmin;" id="233b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 65vmin;" id="234b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 70vmin;" id="235b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 75vmin;" id="236b"></div>
+       <div class="tile grass" style="top: 55vmin; left: 80vmin;" id="237b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 85vmin;" id="238b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 90vmin;" id="239b"></div>
+       <div class="tile wall" style="top: 55vmin; left: 95vmin;" id="240b"></div>
+ 
+       <div class="tile wall" style="top: 60vmin; left: 0vmin;" id="241b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 5vmin;" id="242b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 10vmin;" id="243b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 15vmin;" id="244b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 20vmin;" id="245b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 25vmin;" id="246b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 30vmin;" id="247b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 35vmin;" id="248b"></div>
+       <div class="tile wall" style="top: 60vmin; left: 40vmin;" id="249b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 45vmin;" id="250b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 50vmin;" id="251b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 55vmin;" id="252b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 60vmin;" id="253b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 65vmin;" id="254b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 70vmin;" id="255b"></div>
+       <div class="tile wall" style="top: 60vmin; left: 75vmin;" id="256b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 80vmin;" id="257b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 85vmin;" id="258b"></div>
+       <div class="tile grass" style="top: 60vmin; left: 90vmin;" id="259b"></div>
+       <div class="tile wall" style="top: 60vmin; left: 95vmin;" id="260b"></div>
+ 
+       <div class="tile wall" style="top: 65vmin; left: 0vmin;" id="261b"></div>
+       <div class="tile grass" style="top: 65vmin; left: 5vmin;" id="262b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 10vmin;" id="263b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 15vmin;" id="264b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 20vmin;" id="265b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 25vmin;" id="266b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 30vmin;" id="267b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 35vmin;" id="268b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 40vmin;" id="269b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 45vmin;" id="270b"></div>
+       <div class="tile grass" style="top: 65vmin; left: 50vmin;" id="271b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 55vmin;" id="272b"></div>
+       <div class="tile grass" style="top: 65vmin; left: 60vmin;" id="273b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 65vmin;" id="274b"></div>
+       <div class="tile grass" style="top: 65vmin; left: 70vmin;" id="275b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 75vmin;" id="276b"></div>
+       <div class="tile grass" style="top: 65vmin; left: 80vmin;" id="277b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 85vmin;" id="278b"></div>
+       <div class="tile grass" style="top: 65vmin; left: 90vmin;" id="279b"></div>
+       <div class="tile wall" style="top: 65vmin; left: 95vmin;" id="280b"></div>
+ 
+       <div class="tile wall" style="top: 70vmin; left: 0vmin;" id="281b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 5vmin;" id="282b"></div>
+       <div class="tile wall" style="top: 70vmin; left: 10vmin;" id="283b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 15vmin;" id="284b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 20vmin;" id="285b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 25vmin;" id="286b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 30vmin;" id="287b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 35vmin;" id="288b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 40vmin;" id="289b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 45vmin;" id="290b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 50vmin;" id="291b"></div>
+       <div class="tile wall" style="top: 70vmin; left: 55vmin;" id="292b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 60vmin;" id="293b"></div>
+       <div class="tile wall" style="top: 70vmin; left: 65vmin;" id="294b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 70vmin;" id="295b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 75vmin;" id="296b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 80vmin;" id="297b"></div>
+       <div class="tile wall" style="top: 70vmin; left: 85vmin;" id="298b"></div>
+       <div class="tile grass" style="top: 70vmin; left: 90vmin;" id="299b"></div>
+       <div class="tile wall" style="top: 70vmin; left: 95vmin;" id="300b"></div>
+ 
+       <div class="tile wall" style="top: 75vmin; left: 0vmin;" id="301b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 5vmin;" id="302b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 10vmin;" id="303b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 15vmin;" id="304b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 20vmin;" id="305b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 25vmin;" id="306b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 30vmin;" id="307b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 35vmin;" id="308b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 40vmin;" id="309b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 45vmin;" id="310b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 50vmin;" id="311b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 55vmin;" id="312b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 60vmin;" id="313b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 65vmin;" id="314b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 70vmin;" id="315b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 75vmin;" id="316b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 80vmin;" id="317b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 85vmin;" id="318b"></div>
+       <div class="tile grass" style="top: 75vmin; left: 90vmin;" id="319b"></div>
+       <div class="tile wall" style="top: 75vmin; left: 95vmin;" id="320b"></div>
+      
+       <div class="tile wall" style="top: 80vmin; left: 0vmin;" id="321b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 5vmin;" id="322b"></div>
+       <div class="tile wall" style="top: 80vmin; left: 10vmin;" id="323b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 15vmin;" id="324b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 20vmin;" id="325b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 25vmin;" id="326b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 30vmin;" id="327b"></div>
+       <div class="tile wall" style="top: 80vmin; left: 35vmin;" id="328b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 40vmin;" id="329b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 45vmin;" id="330b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 50vmin;" id="331b"></div>
+       <div class="tile wall" style="top: 80vmin; left: 55vmin;" id="332b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 60vmin;" id="333b"></div>
+       <div class="tile wall" style="top: 80vmin; left: 65vmin;" id="334b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 70vmin;" id="335b"></div>
+       <div class="tile wall" style="top: 80vmin; left: 75vmin;" id="336b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 80vmin;" id="337b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 85vmin;" id="338b"></div>
+       <div class="tile grass" style="top: 80vmin; left: 90vmin;" id="339b"></div>
+       <div class="tile wall" style="top: 80vmin; left: 95vmin;" id="340b"></div>
+ 
+       <div class="tile wall" style="top: 85vmin; left: 0vmin;" id="341b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 5vmin;" id="342b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 10vmin;" id="343b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 15vmin;" id="344b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 20vmin;" id="345b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 25vmin;" id="346b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 30vmin;" id="347b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 35vmin;" id="348b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 40vmin;" id="349b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 45vmin;" id="350b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 50vmin;" id="351b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 55vmin;" id="352b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 60vmin;" id="353b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 65vmin;" id="354b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 70vmin;" id="355b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 75vmin;" id="356b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 80vmin;" id="357b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 85vmin;" id="358b"></div>
+       <div class="tile grass" style="top: 85vmin; left: 90vmin;" id="359b"></div>
+       <div class="tile wall" style="top: 85vmin; left: 95vmin;" id="360b"></div>
+ 
+       <div class="tile wall" style="top: 90vmin; left: 0vmin;" id="361b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 5vmin;" id="362b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 10vmin;" id="363b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 15vmin;" id="364b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 20vmin;" id="365b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 25vmin;" id="366b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 30vmin;" id="367b"></div>
+       <div class="tile wall" style="top: 90vmin; left: 35vmin;" id="368b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 40vmin;" id="369b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 45vmin;" id="370b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 50vmin;" id="371b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 55vmin;" id="372b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 60vmin;" id="373b"></div>
+       <div class="tile wall" style="top: 90vmin; left: 65vmin;" id="374b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 70vmin;" id="375b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 75vmin;" id="376b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 80vmin;" id="377b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 85vmin;" id="378b"></div>
+       <div class="tile grass" style="top: 90vmin; left: 90vmin;" id="379b"></div>
+       <div class="tile wall" style="top: 90vmin; left: 95vmin;" id="380b"></div>
+ 
+       <div class="tile wall" style="top: 95vmin; left: 0vmin;" id="381b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 5vmin;" id="382b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 10vmin;" id="383b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 15vmin;" id="384b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 20vmin;" id="385b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 25vmin;" id="386b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 30vmin;" id="387b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 35vmin;" id="388b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 40vmin;" id="389b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 45vmin;" id="390b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 50vmin;" id="391b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 55vmin;" id="392b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 60vmin;" id="393b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 65vmin;" id="394b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 70vmin;" id="395b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 75vmin;" id="396b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 80vmin;" id="397b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 85vmin;" id="398b"></div>
+       <div class="tile wall" style="top: 95vmin; left: 90vmin;" id="399b"></div>
+       <div class="tile stairs" style="top: 95vmin; left: 95vmin;" id="400b"></div>
+
+       <div class="tile key-1" style="top: 5vmin; left: 10vmin;" id="5key" data-position="23ke" data-floor="2fl"></div>
+       <div class="tile key-1" style="top: 90vmin; left: 10vmin;" id="6key" data-position="363ke" data-floor="2fl"></div>
+       <div class="tile key-1" style="top: 10vmin; left: 90vmin;" id="7key" data-position="59ke" data-floor="2fl"></div>
+       <div class="tile key-1" style="top: 80vmin; left: 90vmin;" id="8key" data-position="339ke" data-floor="2fl"></div>
+
+        <div class="tile enemy-1" style="top: 5vmin; left: 10vmin;" id="5en" data-position="23enm" data-floor="2fl"></div>
+       <div class="tile enemy-2" style="top: 90vmin; left: 10vmin;" id="6en" data-position="363enm" data-floor="2fl"></div>
+       <div class="tile enemy-3" style="top: 10vmin; left: 90vmin;" id="7en" data-position="59enm" data-floor="2fl"></div>
+       <div class="tile enemy-4" style="top: 80vmin; left: 90vmin;" id="8en" data-position="339enm" data-floor="2fl"></div>
+
+    </div>
+
+    <div class="floor" style="top: 0vmin; left: 0vmin; visibility: hidden;" id="3fl" data-tag="c">
+          
+        <div class="tile home" style="top: 0vmin; left: 0vmin;" id="1c"></div>
+       <div class="tile home" style="top: 0vmin; left: 5vmin;" id="2c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 10vmin;" id="3c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 15vmin;" id="4c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 20vmin;" id="5c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 25vmin;" id="6c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 30vmin;" id="7c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 35vmin;" id="8c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 40vmin;" id="9c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 45vmin;" id="10c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 50vmin;" id="11c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 55vmin;" id="12c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 60vmin;" id="13c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 65vmin;" id="14c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 70vmin;" id="15c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 75vmin;" id="16c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 80vmin;" id="17c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 85vmin;" id="18c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 90vmin;" id="19c"></div>
+       <div class="tile wall" style="top: 0vmin; left: 95vmin;" id="20c"></div> 
+ 
+       <div class="tile home" style="top: 5vmin; left: 0vmin;" id="21c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 5vmin;" id="22c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 10vmin;" id="23c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 15vmin;" id="24c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 20vmin;" id="25c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 25vmin;" id="26c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 30vmin;" id="27c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 35vmin;" id="28c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 40vmin;" id="29c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 45vmin;" id="30c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 50vmin;" id="31c"></div>
+       <div class="tile wall" style="top: 5vmin; left: 55vmin;" id="32c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 60vmin;" id="33c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 65vmin;" id="34c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 70vmin;" id="35c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 75vmin;" id="36c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 80vmin;" id="37c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 85vmin;" id="38c"></div>
+       <div class="tile grass" style="top: 5vmin; left: 90vmin;" id="39c"></div>
+       <div class="tile wall" style="top: 5vmin; left: 95vmin;" id="40c"></div>   
+ 
+       <div class="tile wall" style="top: 10vmin; left: 0vmin;" id="41c"></div>
+       <div class="tile grass" style="top: 10vmin; left: 5vmin;" id="42c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 10vmin;" id="43c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 15vmin;" id="44c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 20vmin;" id="45c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 25vmin;" id="46c"></div>
+       <div class="tile grass" style="top: 10vmin; left: 30vmin;" id="47c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 35vmin;" id="48c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 40vmin;" id="49c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 45vmin;" id="50c"></div>
+       <div class="tile grass" style="top: 10vmin; left: 50vmin;" id="51c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 55vmin;" id="52c"></div>
+       <div class="tile grass" style="top: 10vmin; left: 60vmin;" id="53c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 65vmin;" id="54c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 70vmin;" id="55c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 75vmin;" id="56c"></div>
+       <div class="tile grass" style="top: 10vmin; left: 80vmin;" id="57c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 85vmin;" id="58c"></div>
+       <div class="tile grass" style="top: 10vmin; left: 90vmin;" id="59c"></div>
+       <div class="tile wall" style="top: 10vmin; left: 95vmin;" id="60c"></div>   
+ 
+       <div class="tile wall" style="top: 15vmin; left: 0vmin;" id="61c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 5vmin;" id="62c"></div>
+       <div class="tile wall" style="top: 15vmin; left: 10vmin;" id="63c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 15vmin;" id="64c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 20vmin;" id="65c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 25vmin;" id="66c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 30vmin;" id="67c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 35vmin;" id="68c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 40vmin;" id="69c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 45vmin;" id="70c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 50vmin;" id="71c"></div>
+       <div class="tile wall" style="top: 15vmin; left: 55vmin;" id="72c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 60vmin;" id="73c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 65vmin;" id="74c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 70vmin;" id="75c"></div>
+       <div class="tile wall" style="top: 15vmin; left: 75vmin;" id="76c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 80vmin;" id="77c"></div>
+       <div class="tile wall" style="top: 15vmin; left: 85vmin;" id="78c"></div>
+       <div class="tile grass" style="top: 15vmin; left: 90vmin;" id="79c"></div>
+       <div class="tile wall" style="top: 15vmin; left: 95vmin;" id="80c"></div>   
+ 
+       <div class="tile wall" style="top: 20vmin; left: 0vmin;" id="81c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 5vmin;" id="82c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 10vmin;" id="83c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 15vmin;" id="84c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 20vmin;" id="85c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 25vmin;" id="86c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 30vmin;" id="87c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 35vmin;" id="88c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 40vmin;" id="89c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 45vmin;" id="90c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 50vmin;" id="91c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 55vmin;" id="92c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 60vmin;" id="93c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 65vmin;" id="94c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 70vmin;" id="95c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 75vmin;" id="96c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 80vmin;" id="97c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 85vmin;" id="98c"></div>
+       <div class="tile grass" style="top: 20vmin; left: 90vmin;" id="99c"></div>
+       <div class="tile wall" style="top: 20vmin; left: 95vmin;" id="100c"></div>   
+ 
+       <div class="tile wall" style="top: 25vmin; left: 0vmin;" id="101c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 5vmin;" id="102c"></div>
+       <div class="tile wall" style="top: 25vmin; left: 10vmin;" id="103c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 15vmin;" id="104c"></div>
+       <div class="tile wall" style="top: 25vmin; left: 20vmin;" id="105c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 25vmin;" id="106c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 30vmin;" id="107c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 35vmin;" id="108c"></div>
+       <div class="tile wall" style="top: 25vmin; left: 40vmin;" id="109c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 45vmin;" id="110c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 50vmin;" id="111c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 55vmin;" id="112c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 60vmin;" id="113c"></div>
+       <div class="tile wall" style="top: 25vmin; left: 65vmin;" id="114c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 70vmin;" id="115c"></div>
+       <div class="tile wall" style="top: 25vmin; left: 75vmin;" id="116c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 80vmin;" id="117c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 85vmin;" id="118c"></div>
+       <div class="tile grass" style="top: 25vmin; left: 90vmin;" id="119c"></div>
+       <div class="tile wall" style="top: 25vmin; left: 95vmin;" id="120c"></div>
+      
+       <div class="tile wall" style="top: 30vmin; left: 0vmin;" id="121c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 5vmin;" id="122c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 10vmin;" id="123c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 15vmin;" id="124c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 20vmin;" id="125c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 25vmin;" id="126c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 30vmin;" id="127c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 35vmin;" id="128c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 40vmin;" id="129c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 45vmin;" id="130c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 50vmin;" id="131c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 55vmin;" id="132c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 60vmin;" id="133c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 65vmin;" id="134c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 70vmin;" id="135c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 75vmin;" id="136c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 80vmin;" id="137c"></div>
+       <div class="tile grass" style="top: 30vmin; left: 85vmin;" id="138c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 90vmin;" id="139c"></div>
+       <div class="tile wall" style="top: 30vmin; left: 95vmin;" id="140c"></div>
+ 
+       <div class="tile wall" style="top: 35vmin; left: 0vmin;" id="141c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 5vmin;" id="142c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 10vmin;" id="143c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 15vmin;" id="144c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 20vmin;" id="145c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 25vmin;" id="146c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 30vmin;" id="147c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 35vmin;" id="148c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 40vmin;" id="149c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 45vmin;" id="150c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 50vmin;" id="151c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 55vmin;" id="152c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 60vmin;" id="153c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 65vmin;" id="154c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 70vmin;" id="155c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 75vmin;" id="156c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 80vmin;" id="157c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 85vmin;" id="158c"></div>
+       <div class="tile grass" style="top: 35vmin; left: 90vmin;" id="159c"></div>
+       <div class="tile wall" style="top: 35vmin; left: 95vmin;" id="160c"></div>
+ 
+       <div class="tile wall" style="top: 40vmin; left: 0vmin;" id="161c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 5vmin;" id="162c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 10vmin;" id="163c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 15vmin;" id="164c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 20vmin;" id="165c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 25vmin;" id="166c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 30vmin;" id="167c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 35vmin;" id="168c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 40vmin;" id="169c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 45vmin;" id="170c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 50vmin;" id="171c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 55vmin;" id="172c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 60vmin;" id="173c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 65vmin;" id="174c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 70vmin;" id="175c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 75vmin;" id="176c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 80vmin;" id="177c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 85vmin;" id="178c"></div>
+       <div class="tile grass" style="top: 40vmin; left: 90vmin;" id="179c"></div>
+       <div class="tile wall" style="top: 40vmin; left: 95vmin;" id="180c"></div>
+ 
+       <div class="tile wall" style="top: 45vmin; left: 0vmin;" id="181c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 5vmin;" id="182c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 10vmin;" id="183c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 15vmin;" id="184c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 20vmin;" id="185c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 25vmin;" id="186c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 30vmin;" id="187c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 35vmin;" id="188c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 40vmin;" id="189c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 45vmin;" id="190c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 50vmin;" id="191c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 55vmin;" id="192c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 60vmin;" id="193c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 65vmin;" id="194c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 70vmin;" id="195c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 75vmin;" id="196c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 80vmin;" id="197c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 85vmin;" id="198c"></div>
+       <div class="tile grass" style="top: 45vmin; left: 90vmin;" id="199c"></div>
+       <div class="tile wall" style="top: 45vmin; left: 95vmin;" id="200c"></div>
+ 
+       <div class="tile wall" style="top: 50vmin; left: 0vmin;" id="201c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 5vmin;" id="202c"></div>
+       <div class="tile wall" style="top: 50vmin; left: 10vmin;" id="203c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 15vmin;" id="204c"></div>
+       <div class="tile wall" style="top: 50vmin; left: 20vmin;" id="205c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 25vmin;" id="206c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 30vmin;" id="207c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 35vmin;" id="208c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 40vmin;" id="209c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 45vmin;" id="210c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 50vmin;" id="211c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 55vmin;" id="212c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 60vmin;" id="213c"></div>
+       <div class="tile wall" style="top: 50vmin; left: 65vmin;" id="214c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 70vmin;" id="215c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 75vmin;" id="216c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 80vmin;" id="217c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 85vmin;" id="218c"></div>
+       <div class="tile grass" style="top: 50vmin; left: 90vmin;" id="219c"></div>
+       <div class="tile wall" style="top: 50vmin; left: 95vmin;" id="220c"></div>
+ 
+       <div class="tile wall" style="top: 55vmin; left: 0vmin;" id="221c"></div>
+       <div class="tile grass" style="top: 55vmin; left: 5vmin;" id="222c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 10vmin;" id="223c"></div>
+       <div class="tile grass" style="top: 55vmin; left: 15vmin;" id="224c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 20vmin;" id="225c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 25vmin;" id="226c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 30vmin;" id="227c"></div>
+       <div class="tile grass" style="top: 55vmin; left: 35vmin;" id="228c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 40vmin;" id="229c"></div>
+       <div class="tile grass" style="top: 55vmin; left: 45vmin;" id="230c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 50vmin;" id="231c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 55vmin;" id="232c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 60vmin;" id="233c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 65vmin;" id="234c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 70vmin;" id="235c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 75vmin;" id="236c"></div>
+       <div class="tile grass" style="top: 55vmin; left: 80vmin;" id="237c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 85vmin;" id="238c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 90vmin;" id="239c"></div>
+       <div class="tile wall" style="top: 55vmin; left: 95vmin;" id="240c"></div>
+ 
+       <div class="tile wall" style="top: 60vmin; left: 0vmin;" id="241c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 5vmin;" id="242c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 10vmin;" id="243c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 15vmin;" id="244c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 20vmin;" id="245c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 25vmin;" id="246c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 30vmin;" id="247c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 35vmin;" id="248c"></div>
+       <div class="tile wall" style="top: 60vmin; left: 40vmin;" id="249c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 45vmin;" id="250c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 50vmin;" id="251c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 55vmin;" id="252c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 60vmin;" id="253c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 65vmin;" id="254c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 70vmin;" id="255c"></div>
+       <div class="tile wall" style="top: 60vmin; left: 75vmin;" id="256c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 80vmin;" id="257c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 85vmin;" id="258c"></div>
+       <div class="tile grass" style="top: 60vmin; left: 90vmin;" id="259c"></div>
+       <div class="tile wall" style="top: 60vmin; left: 95vmin;" id="260c"></div>
+ 
+       <div class="tile wall" style="top: 65vmin; left: 0vmin;" id="261c"></div>
+       <div class="tile grass" style="top: 65vmin; left: 5vmin;" id="262c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 10vmin;" id="263c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 15vmin;" id="264c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 20vmin;" id="265c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 25vmin;" id="266c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 30vmin;" id="267c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 35vmin;" id="268c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 40vmin;" id="269c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 45vmin;" id="270c"></div>
+       <div class="tile grass" style="top: 65vmin; left: 50vmin;" id="271c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 55vmin;" id="272c"></div>
+       <div class="tile grass" style="top: 65vmin; left: 60vmin;" id="273c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 65vmin;" id="274c"></div>
+       <div class="tile grass" style="top: 65vmin; left: 70vmin;" id="275c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 75vmin;" id="276c"></div>
+       <div class="tile grass" style="top: 65vmin; left: 80vmin;" id="277c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 85vmin;" id="278c"></div>
+       <div class="tile grass" style="top: 65vmin; left: 90vmin;" id="279c"></div>
+       <div class="tile wall" style="top: 65vmin; left: 95vmin;" id="280c"></div>
+ 
+       <div class="tile wall" style="top: 70vmin; left: 0vmin;" id="281c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 5vmin;" id="282c"></div>
+       <div class="tile wall" style="top: 70vmin; left: 10vmin;" id="283c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 15vmin;" id="284c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 20vmin;" id="285c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 25vmin;" id="286c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 30vmin;" id="287c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 35vmin;" id="288c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 40vmin;" id="289c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 45vmin;" id="290c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 50vmin;" id="291c"></div>
+       <div class="tile wall" style="top: 70vmin; left: 55vmin;" id="292c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 60vmin;" id="293c"></div>
+       <div class="tile wall" style="top: 70vmin; left: 65vmin;" id="294c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 70vmin;" id="295c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 75vmin;" id="296c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 80vmin;" id="297c"></div>
+       <div class="tile wall" style="top: 70vmin; left: 85vmin;" id="298c"></div>
+       <div class="tile grass" style="top: 70vmin; left: 90vmin;" id="299c"></div>
+       <div class="tile wall" style="top: 70vmin; left: 95vmin;" id="300c"></div>
+ 
+       <div class="tile wall" style="top: 75vmin; left: 0vmin;" id="301c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 5vmin;" id="302c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 10vmin;" id="303c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 15vmin;" id="304c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 20vmin;" id="305c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 25vmin;" id="306c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 30vmin;" id="307c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 35vmin;" id="308c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 40vmin;" id="309c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 45vmin;" id="310c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 50vmin;" id="311c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 55vmin;" id="312c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 60vmin;" id="313c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 65vmin;" id="314c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 70vmin;" id="315c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 75vmin;" id="316c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 80vmin;" id="317c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 85vmin;" id="318c"></div>
+       <div class="tile grass" style="top: 75vmin; left: 90vmin;" id="319c"></div>
+       <div class="tile wall" style="top: 75vmin; left: 95vmin;" id="320c"></div>
+      
+       <div class="tile wall" style="top: 80vmin; left: 0vmin;" id="321c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 5vmin;" id="322c"></div>
+       <div class="tile wall" style="top: 80vmin; left: 10vmin;" id="323c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 15vmin;" id="324c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 20vmin;" id="325c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 25vmin;" id="326c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 30vmin;" id="327c"></div>
+       <div class="tile wall" style="top: 80vmin; left: 35vmin;" id="328c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 40vmin;" id="329c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 45vmin;" id="330c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 50vmin;" id="331c"></div>
+       <div class="tile wall" style="top: 80vmin; left: 55vmin;" id="332c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 60vmin;" id="333c"></div>
+       <div class="tile wall" style="top: 80vmin; left: 65vmin;" id="334c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 70vmin;" id="335c"></div>
+       <div class="tile wall" style="top: 80vmin; left: 75vmin;" id="336c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 80vmin;" id="337c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 85vmin;" id="338c"></div>
+       <div class="tile grass" style="top: 80vmin; left: 90vmin;" id="339c"></div>
+       <div class="tile wall" style="top: 80vmin; left: 95vmin;" id="340c"></div>
+ 
+       <div class="tile wall" style="top: 85vmin; left: 0vmin;" id="341c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 5vmin;" id="342c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 10vmin;" id="343c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 15vmin;" id="344c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 20vmin;" id="345c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 25vmin;" id="346c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 30vmin;" id="347c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 35vmin;" id="348c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 40vmin;" id="349c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 45vmin;" id="350c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 50vmin;" id="351c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 55vmin;" id="352c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 60vmin;" id="353c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 65vmin;" id="354c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 70vmin;" id="355c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 75vmin;" id="356c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 80vmin;" id="357c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 85vmin;" id="358c"></div>
+       <div class="tile grass" style="top: 85vmin; left: 90vmin;" id="359c"></div>
+       <div class="tile wall" style="top: 85vmin; left: 95vmin;" id="360c"></div>
+ 
+       <div class="tile wall" style="top: 90vmin; left: 0vmin;" id="361c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 5vmin;" id="362c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 10vmin;" id="363c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 15vmin;" id="364c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 20vmin;" id="365c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 25vmin;" id="366c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 30vmin;" id="367c"></div>
+       <div class="tile wall" style="top: 90vmin; left: 35vmin;" id="368c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 40vmin;" id="369c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 45vmin;" id="370c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 50vmin;" id="371c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 55vmin;" id="372c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 60vmin;" id="373c"></div>
+       <div class="tile wall" style="top: 90vmin; left: 65vmin;" id="374c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 70vmin;" id="375c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 75vmin;" id="376c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 80vmin;" id="377c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 85vmin;" id="378c"></div>
+       <div class="tile grass" style="top: 90vmin; left: 90vmin;" id="379c"></div>
+       <div class="tile wall" style="top: 90vmin; left: 95vmin;" id="380c"></div>
+ 
+       <div class="tile wall" style="top: 95vmin; left: 0vmin;" id="381c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 5vmin;" id="382c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 10vmin;" id="383c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 15vmin;" id="384c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 20vmin;" id="385c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 25vmin;" id="386c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 30vmin;" id="387c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 35vmin;" id="388c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 40vmin;" id="389c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 45vmin;" id="390c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 50vmin;" id="391c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 55vmin;" id="392c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 60vmin;" id="393c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 65vmin;" id="394c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 70vmin;" id="395c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 75vmin;" id="396c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 80vmin;" id="397c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 85vmin;" id="398c"></div>
+       <div class="tile stairs" style="top: 95vmin; left: 90vmin;" id="399c"></div>
+       <div class="tile wall" style="top: 95vmin; left: 95vmin;" id="400c"></div>
+
+        <div class="tile key-1" style="top: 5vmin; left: 10vmin;" id="9key" data-position="23ke" data-floor="3fl"></div>
+       <div class="tile key-1" style="top: 90vmin; left: 10vmin;" id="10key" data-position="363ke" data-floor="3fl"></div>
+       <div class="tile key-1" style="top: 10vmin; left: 90vmin;" id="11key" data-position="59ke" data-floor="3fl"></div>
+       <div class="tile key-1" style="top: 80vmin; left: 90vmin;" id="12key" data-position="339ke" data-floor="3fl"></div>
+
+        <div class="tile enemy-1" style="top: 5vmin; left: 10vmin;" id="9en" data-position="23enm" data-floor="3fl"></div>
+       <div class="tile enemy-2" style="top: 90vmin; left: 10vmin;" id="10en" data-position="363enm" data-floor="3fl"></div>
+       <div class="tile enemy-3" style="top: 10vmin; left: 90vmin;" id="11en" data-position="59enm" data-floor="3fl"></div>
+       <div class="tile enemy-4" style="top: 80vmin; left: 90vmin;" id="12en" data-position="339enm" data-floor="3fl"></div>
+ 
+    </div>
+    
+    
+    <div class="character" id="player" width="5vmin" height="5vmin" data-position="1pl"> </div>
+
+    </div>
+
+    <div style="position: absolute; top: 0px; visibility:hidden;" id="details">
+        <p id="text" style="color: #FFFFFF;">Details</p>
+        <p id="text2" style="color:#FFFFFF;"> Enemy details </p>
+    </div>
+
+</body>
+
+    <script>
+
+        if (window.innerWidth > window.innerHeight) {
+            div = document.getElementById("container");
+            alignoffset = (window.innerWidth - window.innerHeight) / 2;
+            div.style.top = "0px";
+            div.style.left = alignoffset + "px";
+        }
+
+        if (window.innerHeight > window.innerWidth) {
+            div = document.getElementById("container");
+            alignoffset = (window.innerHeight - window.innerWidth) / 2;
+            div.style.left = "0px";
+            div.style.top = alignoffset + "px";
+        }
+
+        element = document.getElementById("player");
+        element.style.position = 'absolute';
+        element.style.left = '0vmin';
+        element.style.top = '0vmin';
+        element.style.width = '5vmin';
+        element.style.height = '5vmin';
+
+        currentfloor = "1fl";
+        blockedtiles = ["tile wall", "end"];
+        enemyblockedtiles = ["tile wall", "tile stairs", "tile home", "end"];
+        enmmov1 = ["idl1", "idr1", "idt1", "idb1"];
+        enmmov2 = ["idl2", "idr2", "idt2", "idb2"];
+        enmmov3 = ["idl3", "idr3", "idt3", "idb3"];
+        enmmov4 = ["idl4", "idr4", "idt4", "idb4"];
+        direction1 = 0;
+        direction2 = 0;
+        direction3 = 0;
+        direction4 = 0;
+        enmdir1 = "none";
+        enmdir2 = "none";
+        enmdir3 = "none";
+        enmdir4 = "none";
+
+        enemy1 = (1 + (4 * (parseInt(currentfloor) - 1))) + "en"
+        enemy2 = (2 + (4 * (parseInt(currentfloor) - 1))) + "en"
+        enemy3 = (3 + (4 * (parseInt(currentfloor) - 1))) + "en"
+        enemy4 = (4 + (4 * (parseInt(currentfloor) - 1))) + "en"
+
+        enm1 = document.getElementById(enemy1)
+        enm2 = document.getElementById(enemy2)
+        enm3 = document.getElementById(enemy3)
+        enm4 = document.getElementById(enemy4)
+
+        enmkey1 = "no"
+        enmkey2 = "no"
+        enmkey3 = "no"
+        enmkey4 = "no"
+        lock1 = "closed"
+        lock2 = "closed"
+        lock3 = "closed"
+        lock4 = "closed"
+        lock5 = "closed"
+        keyid1 = (1 + (4 * (parseInt(currentfloor) - 1))) + "key"
+        keyid2 = (2 + (4 * (parseInt(currentfloor) - 1))) + "key"
+        keyid3 = (3 + (4 * (parseInt(currentfloor) - 1))) + "key"
+        keyid4 = (4 + (4 * (parseInt(currentfloor) - 1))) + "key"
+        key1 = document.getElementById(keyid1)
+        key2 = document.getElementById(keyid2)
+        key3 = document.getElementById(keyid3)
+        key4 = document.getElementById(keyid4)
+        cd = 250
+
+        function reset() {
+                element.style.left = '0vmin';
+                element.style.top = '0vmin';
+                element.style.width = '5vmin';
+                element.style.height = '5vmin';
+                element.dataset.position = "1pl";
+                element.className = "character";
+                enmkey1 = "no"
+                enmkey2 = "no"
+                enmkey3 = "no"
+                enmkey4 = "no"
+                lock1 = "closed"
+                lock2 = "closed"
+                lock3 = "closed"
+                lock4 = "closed"
+                lock5 = "closed"
+                key1.style.visibility = "visible"
+                key2.style.visibility = "visible"
+                key3.style.visibility = "visible"
+                key4.style.visibility = "visible"
+                enm1.className = "tile enemy-1"; 
+                enm2.className = "tile enemy-2"; 
+                enm3.className = "tile enemy-3"; 
+                enm4.className = "tile enemy-4"; 
+                document.getElementById("130" + floortag).className = "tile wall"
+                document.addEventListener("keydown", keypress);
+        }
+
+        function cooldown() {
+            document.addEventListener("keydown", keypress);
+        }
+
+        function redefine() {
+            enemy1 = (1 + (4 * (parseInt(currentfloor) - 1))) + "en"
+            enemy2 = (2 + (4 * (parseInt(currentfloor) - 1))) + "en"
+            enemy3 = (3 + (4 * (parseInt(currentfloor) - 1))) + "en"
+            enemy4 = (4 + (4 * (parseInt(currentfloor) - 1))) + "en"
+
+            enm1 = document.getElementById(enemy1)
+            enm2 = document.getElementById(enemy2)
+            enm3 = document.getElementById(enemy3)
+            enm4 = document.getElementById(enemy4)
+
+            keyid1 = (1 + (4 * (parseInt(currentfloor) - 1))) + "key"
+            keyid2 = (2 + (4 * (parseInt(currentfloor) - 1))) + "key"
+            keyid3 = (3 + (4 * (parseInt(currentfloor) - 1))) + "key"
+            keyid4 = (4 + (4 * (parseInt(currentfloor) - 1))) + "key"
+
+            key1 = document.getElementById(keyid1)
+            key2 = document.getElementById(keyid2)
+            key3 = document.getElementById(keyid3)
+            key4 = document.getElementById(keyid4)
+
+            enmkey1 = "no"
+            enmkey2 = "no"
+            enmkey3 = "no"
+            enmkey4 = "no"
+            lock1 = "closed"
+            lock2 = "closed"
+            lock3 = "closed"
+            lock4 = "closed"
+            lock5 = "closed"
+
+        }
+
+        function enemymovement() {           
+            
+            position = parseInt(element.getAttribute('data-position'));
+            enmpos1 = parseInt(enm1.getAttribute('data-position'));
+            enmpos2 = parseInt(enm2.getAttribute('data-position'));
+            enmpos3 = parseInt(enm3.getAttribute('data-position'));
+            enmpos4 = parseInt(enm4.getAttribute('data-position'));
+            
+            floortag = document.getElementById(currentfloor).getAttribute('data-tag');
+            
+            if ((enmpos1 - 1) % 20 != 0) {idl1 = enmpos1 - 1; onleft1 = document.getElementById(idl1 + floortag);}
+            else {idl1 = 0; onleft1 = document.getElementById("end");}
+            if (enmpos1 % 20 != 0) {idr1 = enmpos1 + 1; onright1 = document.getElementById(idr1 + floortag);}
+            else {idr1 = 0; onright1 = document.getElementById("end");}
+            if ((enmpos1 - 20) < 1) {idt1 = 0; ontop1 = document.getElementById("end");}
+            else {idt1 = enmpos1 - 20; ontop1 = document.getElementById(idt1 + floortag);}
+            if ((enmpos1 + 20) > 400) {idb1 = 0; onbottom1 = document.getElementById("end");}
+            else {idb1 = enmpos1 + 20; onbottom1 = document.getElementById(idb1 + floortag);}
+            
+            if (enemyblockedtiles.includes(onleft1.className)) {idl1 = 0;}
+            if (enemyblockedtiles.includes(onright1.className)) {idr1 = 0;}
+            if (enemyblockedtiles.includes(ontop1.className)) {idt1 = 0;}
+            if (enemyblockedtiles.includes(onbottom1.className)) {idb1 = 0;}
+
+            while (direction1 === 0) {
+                selected1 = Math.floor(Math.random() * 4);
+                direction1 = eval(enmmov1 [selected1]);
+                if (enmdir1 === "idl1" && enmmov1 [selected1] === "idr1") {direction1 = 0}
+                if (enmdir1 === "idr1" && enmmov1 [selected1] === "idl1") {direction1 = 0}
+                if (enmdir1 === "idt1" && enmmov1 [selected1] === "idb1") {direction1 = 0}
+                if (enmdir1 === "idb1" && enmmov1 [selected1] === "idt1") {direction1 = 0}
+                change = 1
+            }
+            if (change === 1) {enmdir1 = enmmov1 [selected1]; change = 0;}
+
+            if (eval(enmdir1) != 0) {
+                
+                //new direction:
+                if (Math.floor(Math.random() * 2) + 1 != 1) {
+                
+                    if (enmdir1 === "idl1" || enmdir1 === "idr1") {
+                        newdir1 = enmmov1.slice(2,4)
+                    }
+                    else {
+                        newdir1 = enmmov1.slice(0,2)
+                    }
+                    if (eval(newdir1[0]) === 0) {newdir1 = newdir1.slice(1,2)}
+                    if (newdir1.length === 1) {if (eval(newdir1[0]) === 0) {newdir1 = newdir1.slice(0,0)}}
+                    else if (newdir1.length === 2) {if (eval(newdir1[1]) === 0) {newdir1 = newdir1.slice(0,1)}}
+                    if (newdir1.length === 0) {enmdir1 = enmdir1}
+                    if (newdir1.length === 1) {enmdir1 = newdir1[0]}
+                    if (newdir1.length === 2) {enmdir1 = newdir1[Math.floor(Math.random() * 2)]}
+                }
+                else {newdir1 = "none"}
+
+                //movement:
+
+                if (enmdir1 === "idl1") {
+                    enm1.style.left = parseInt(enm1.style.left) - 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 - 1) + "p";
+                }
+                else if (enmdir1 === "idr1") {
+                    enm1.style.left = parseInt(enm1.style.left) + 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 + 1) + "p";  
+                }
+                else if (enmdir1 === "idt1") {
+                    enm1.style.top = parseInt(enm1.style.top) - 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 - 20) + "p";
+                }
+                else if (enmdir1 === "idb1") {
+                    enm1.style.top = parseInt(enm1.style.top) + 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 + 20) + "p";
+                }
+                
+            }
+            
+            else {
+                direction1 = 0;
+                while (direction1 === 0) {
+                selected1 = Math.floor(Math.random() * 4);
+                direction1 = eval(enmmov1 [selected1]);
+                if (enmdir1 === "idl1" && enmmov1 [selected1] === "idr1") {direction1 = 0}
+                if (enmdir1 === "idr1" && enmmov1 [selected1] === "idl1") {direction1 = 0}
+                if (enmdir1 === "idt1" && enmmov1 [selected1] === "idb1") {direction1 = 0}
+                if (enmdir1 === "idb1" && enmmov1 [selected1] === "idt1") {direction1 = 0}
+                change = 1
+                }
+                if (change === 1) {enmdir1 = enmmov1 [selected1]; change = 0;}
+
+                if (enmdir1 === "idl1") {
+                    enm1.style.left = parseInt(enm1.style.left) - 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 - 1) + "p";
+                }
+                else if (enmdir1 === "idr1") {
+                    enm1.style.left = parseInt(enm1.style.left) + 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 + 1) + "p";  
+                }
+                else if (enmdir1 === "idt1") {
+                    enm1.style.top = parseInt(enm1.style.top) - 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 - 20) + "p";
+                }
+                else if (enmdir1 === "idb1") {
+                    enm1.style.top = parseInt(enm1.style.top) + 5 + 'vmin';
+                    enm1.dataset.position = (enmpos1 + 20) + "p";
+                }
+
+            }
+
+
+            
+            if ((enmpos2 - 1) % 20 != 0) {idl2 = enmpos2 - 1; onleft2 = document.getElementById(idl2 + floortag);}
+           else {idl2 = 0; onleft2 = document.getElementById("end");}
+           if (enmpos2 % 20 != 0) {idr2 = enmpos2 + 1; onright2 = document.getElementById(idr2 + floortag);}
+           else {idr2 = 0; onright2 = document.getElementById("end");}
+           if ((enmpos2 - 20) < 1) {idt2 = 0; ontop2 = document.getElementById("end");}
+           else {idt2 = enmpos2 - 20; ontop2 = document.getElementById(idt2 + floortag);}
+           if ((enmpos2 + 20) > 400) {idb2 = 0; onbottom2 = document.getElementById("end");}
+           else {idb2 = enmpos2 + 20; onbottom2 = document.getElementById(idb2 + floortag);}
+          
+           if (enemyblockedtiles.includes(onleft2.className)) {idl2 = 0;}
+           if (enemyblockedtiles.includes(onright2.className)) {idr2 = 0;}
+           if (enemyblockedtiles.includes(ontop2.className)) {idt2 = 0;}
+           if (enemyblockedtiles.includes(onbottom2.className)) {idb2 = 0;}
+
+
+            while (direction2 === 0) {
+               selected2 = Math.floor(Math.random() * 4);
+               direction2 = eval(enmmov2 [selected2]);
+               if (enmdir2 === "idl2" && enmmov2 [selected2] === "idr2") {direction2 = 0}
+               if (enmdir2 === "idr2" && enmmov2 [selected2] === "idl2") {direction2 = 0}
+               if (enmdir2 === "idt2" && enmmov2 [selected2] === "idb2") {direction2 = 0}
+               if (enmdir2 === "idb2" && enmmov2 [selected2] === "idt2") {direction2 = 0}
+               change = 1
+           }
+
+           if (change === 1) {enmdir2 = enmmov2 [selected2]; change = 0;}
+ 
+           if (eval(enmdir2) != 0) {
+              
+               //new direction:
+               if (Math.floor(Math.random() * 2) + 1 != 1) {
+              
+                   if (enmdir2 === "idl2" || enmdir2 === "idr2") {
+                       newdir2 = enmmov2.slice(2,4)
+                   }
+                   else {
+                       newdir2 = enmmov2.slice(0,2)
+                   }
+                   if (eval(newdir2[0]) === 0) {newdir2 = newdir2.slice(1,2)}
+                   if (newdir2.length === 1) {if (eval(newdir2[0]) === 0) {newdir2 = newdir2.slice(0,0)}}
+                   else if (newdir2.length === 2) {if (eval(newdir2[1]) === 0) {newdir2 = newdir2.slice(0,1)}}
+                   if (newdir2.length === 0) {enmdir2 = enmdir2}
+                   if (newdir2.length === 1) {enmdir2 = newdir2[0]}
+                   if (newdir2.length === 2) {enmdir2 = newdir2[Math.floor(Math.random() * 2)]}
+               }
+               else {newdir2 = "none"}
+ 
+               //movement:
+ 
+               if (enmdir2 === "idl2") {
+                   enm2.style.left = parseInt(enm2.style.left) - 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 - 1) + "p";
+               }
+               else if (enmdir2 === "idr2") {
+                   enm2.style.left = parseInt(enm2.style.left) + 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 + 1) + "p"; 
+               }
+               else if (enmdir2 === "idt2") {
+                   enm2.style.top = parseInt(enm2.style.top) - 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 - 20) + "p";
+               }
+               else if (enmdir2 === "idb2") {
+                   enm2.style.top = parseInt(enm2.style.top) + 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 + 20) + "p";
+               }
+ 
+               //redefinitions:
+              
+           }
+          
+           else {
+               direction2 = 0;
+               while (direction2 === 0) {
+               selected2 = Math.floor(Math.random() * 4);
+               direction2 = eval(enmmov2 [selected2]);
+               if (enmdir2 === "idl2" && enmmov2 [selected2] === "idr2") {direction2 = 0}
+               if (enmdir2 === "idr2" && enmmov2 [selected2] === "idl2") {direction2 = 0}
+               if (enmdir2 === "idt2" && enmmov2 [selected2] === "idb2") {direction2 = 0}
+               if (enmdir2 === "idb2" && enmmov2 [selected2] === "idt2") {direction2 = 0}
+               change = 1
+               }
+
+               if (change === 1) {enmdir2 = enmmov2 [selected2]; change = 0;}
+ 
+               if (enmdir2 === "idl2") {
+                   enm2.style.left = parseInt(enm2.style.left) - 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 - 1) + "p";
+               }
+               else if (enmdir2 === "idr2") {
+                   enm2.style.left = parseInt(enm2.style.left) + 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 + 1) + "p"; 
+               }
+               else if (enmdir2 === "idt2") {
+                   enm2.style.top = parseInt(enm2.style.top) - 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 - 20) + "p";
+               }
+               else if (enmdir2 === "idb2") {
+                   enm2.style.top = parseInt(enm2.style.top) + 5 + 'vmin';
+                   enm2.dataset.position = (enmpos2 + 20) + "p";
+               }
+ 
+           }
+ 
+
+
+           if ((enmpos3 - 1) % 20 != 0) {idl3 = enmpos3 - 1; onleft3 = document.getElementById(idl3 + floortag);}
+           else {idl3 = 0; onleft3 = document.getElementById("end");}
+           if (enmpos3 % 20 != 0) {idr3 = enmpos3 + 1; onright3 = document.getElementById(idr3 + floortag);}
+           else {idr3 = 0; onright3 = document.getElementById("end");}
+           if ((enmpos3 - 20) < 1) {idt3 = 0; ontop3 = document.getElementById("end");}
+           else {idt3 = enmpos3 - 20; ontop3 = document.getElementById(idt3 + floortag);}
+           if ((enmpos3 + 20) > 400) {idb3 = 0; onbottom3 = document.getElementById("end");}
+           else {idb3 = enmpos3 + 20; onbottom3 = document.getElementById(idb3 + floortag);}
+          
+           if (enemyblockedtiles.includes(onleft3.className)) {idl3 = 0;}
+           if (enemyblockedtiles.includes(onright3.className)) {idr3 = 0;}
+           if (enemyblockedtiles.includes(ontop3.className)) {idt3 = 0;}
+           if (enemyblockedtiles.includes(onbottom3.className)) {idb3 = 0;}
+ 
+           while (direction3 === 0) {
+               selected3 = Math.floor(Math.random() * 4);
+               direction3 = eval(enmmov3 [selected3]);
+               if (enmdir3 === "idl3" && enmmov3 [selected3] === "idr3") {direction3 = 0}
+               if (enmdir3 === "idr3" && enmmov3 [selected3] === "idl3") {direction3 = 0}
+               if (enmdir3 === "idt3" && enmmov3 [selected3] === "idb3") {direction3 = 0}
+               if (enmdir3 === "idb3" && enmmov3 [selected3] === "idt3") {direction3 = 0}
+               change = 1
+           }
+
+           if (change === 1) {enmdir3 = enmmov3 [selected3]; change = 0;}
+ 
+           if (eval(enmdir3) != 0) {
+              
+               //new direction:
+               if (Math.floor(Math.random() * 2) + 1 != 1) {
+              
+                   if (enmdir3 === "idl3" || enmdir3 === "idr3") {
+                       newdir3 = enmmov3.slice(2,4)
+                   }
+                   else {
+                       newdir3 = enmmov3.slice(0,2)
+                   }
+                   if (eval(newdir3[0]) === 0) {newdir3 = newdir3.slice(1,2)}
+                   if (newdir3.length === 1) {if (eval(newdir3[0]) === 0) {newdir3 = newdir3.slice(0,0)}}
+                   else if (newdir3.length === 2) {if (eval(newdir3[1]) === 0) {newdir3 = newdir3.slice(0,1)}}
+                   if (newdir3.length === 0) {enmdir3 = enmdir3}
+                   if (newdir3.length === 1) {enmdir3 = newdir3[0]}
+                   if (newdir3.length === 2) {enmdir3 = newdir3[Math.floor(Math.random() * 2)]}
+               }
+               else {newdir3 = "none"}
+ 
+               //movement:
+ 
+               if (enmdir3 === "idl3") {
+                   enm3.style.left = parseInt(enm3.style.left) - 5 + 'vmin';
+                   enm3.dataset.position = (enmpos3 - 1) + "p";
+               }
+               else if (enmdir3 === "idr3") {
+                   enm3.style.left = parseInt(enm3.style.left) + 5 + 'vmin';
+                   enm3.dataset.position = (enmpos3 + 1) + "p"; 
+               }
+               else if (enmdir3 === "idt3") {
+                   enm3.style.top = parseInt(enm3.style.top) - 5 + 'vmin';
+                   enm3.dataset.position = (enmpos3 - 20) + "p";
+               }
+               else if (enmdir3 === "idb3") {
+                   enm3.style.top = parseInt(enm3.style.top) + 5 + 'vmin';
+                   enm3.dataset.position = (enmpos3 + 20) + "p";
+               }
+
+            }
+
+            else {
+              direction3 = 0;
+              while (direction3 === 0) {
+              selected3 = Math.floor(Math.random() * 4);
+              direction3 = eval(enmmov3 [selected3]);
+              if (enmdir3 === "idl3" && enmmov3 [selected3] === "idr3") {direction3 = 0}
+              if (enmdir3 === "idr3" && enmmov3 [selected3] === "idl3") {direction3 = 0}
+              if (enmdir3 === "idt3" && enmmov3 [selected3] === "idb3") {direction3 = 0}
+              if (enmdir3 === "idb3" && enmmov3 [selected3] === "idt3") {direction3 = 0}
+              change = 1
+              }
+
+              if (change === 1) {enmdir3 = enmmov3 [selected3]; change = 0;}
+              if (enmdir3 === "idl3") {
+                  enm3.style.left = parseInt(enm3.style.left) - 5 + 'vmin';
+                  enm3.dataset.position = (enmpos3 - 1) + "p";
+              }
+              else if (enmdir3 === "idr3") {
+                  enm3.style.left = parseInt(enm3.style.left) + 5 + 'vmin';
+                  enm3.dataset.position = (enmpos3 + 1) + "p";
+              }
+              else if (enmdir3 === "idt3") {
+                  enm3.style.top = parseInt(enm3.style.top) - 5 + 'vmin';
+                  enm3.dataset.position = (enmpos3 - 20) + "p";
+              }
+              else if (enmdir3 === "idb3") {
+                  enm3.style.top = parseInt(enm3.style.top) + 5 + 'vmin';
+                  enm3.dataset.position = (enmpos3 + 20) + "p";
+              }
+            }
+
+            if ((enmpos4 - 1) % 20 != 0) {idl4 = enmpos4 - 1; onleft4 = document.getElementById(idl4 + floortag);}
+           else {idl4 = 0; onleft4 = document.getElementById("end");}
+           if (enmpos4 % 20 != 0) {idr4 = enmpos4 + 1; onright4 = document.getElementById(idr4 + floortag);}
+           else {idr4 = 0; onright4 = document.getElementById("end");}
+           if ((enmpos4 - 20) < 1) {idt4 = 0; ontop4 = document.getElementById("end");}
+           else {idt4 = enmpos4 - 20; ontop4 = document.getElementById(idt4 + floortag);}
+           if ((enmpos4 + 20) > 400) {idb4 = 0; onbottom4 = document.getElementById("end");}
+           else {idb4 = enmpos4 + 20; onbottom4 = document.getElementById(idb4 + floortag);}
+          
+           if (enemyblockedtiles.includes(onleft4.className)) {idl4 = 0;}
+           if (enemyblockedtiles.includes(onright4.className)) {idr4 = 0;}
+           if (enemyblockedtiles.includes(ontop4.className)) {idt4 = 0;}
+           if (enemyblockedtiles.includes(onbottom4.className)) {idb4 = 0;}
+ 
+           while (direction4 === 0) {
+               selected4 = Math.floor(Math.random() * 4);
+               direction4 = eval(enmmov4 [selected4]);
+               if (enmdir4 === "idl4" && enmmov4 [selected4] === "idr4") {direction4 = 0}
+               if (enmdir4 === "idr4" && enmmov4 [selected4] === "idl4") {direction4 = 0}
+               if (enmdir4 === "idt4" && enmmov4 [selected4] === "idb4") {direction4 = 0}
+               if (enmdir4 === "idb4" && enmmov4 [selected4] === "idt4") {direction4 = 0}
+               change = 1
+           }
+           if (change === 1) {enmdir4 = enmmov4 [selected4]; change = 0;}
+ 
+           if (eval(enmdir4) != 0) {
+              
+               //new direction:
+               if (Math.floor(Math.random() * 2) + 1 != 1) {
+              
+                   if (enmdir4 === "idl4" || enmdir4 === "idr4") {
+                       newdir4 = enmmov4.slice(2,4)
+                   }
+                   else {
+                       newdir4 = enmmov4.slice(0,2)
+                   }
+                   if (eval(newdir4[0]) === 0) {newdir4 = newdir4.slice(1,2)}
+                   if (newdir4.length === 1) {if (eval(newdir4[0]) === 0) {newdir4 = newdir4.slice(0,0)}}
+                   else if (newdir4.length === 2) {if (eval(newdir4[1]) === 0) {newdir4 = newdir4.slice(0,1)}}
+                   if (newdir4.length === 0) {enmdir4 = enmdir4}
+                   if (newdir4.length === 1) {enmdir4 = newdir4[0]}
+                   if (newdir4.length === 2) {enmdir4 = newdir4[Math.floor(Math.random() * 2)]}
+               }
+               else {newdir4 = "none"}
+ 
+               //movement:
+ 
+               if (enmdir4 === "idl4") {
+                   enm4.style.left = parseInt(enm4.style.left) - 5 + 'vmin';
+                   enm4.dataset.position = (enmpos4 - 1) + "p";
+               }
+               else if (enmdir4 === "idr4") {
+                   enm4.style.left = parseInt(enm4.style.left) + 5 + 'vmin';
+                   enm4.dataset.position = (enmpos4 + 1) + "p"; 
+               }
+               else if (enmdir4 === "idt4") {
+                   enm4.style.top = parseInt(enm4.style.top) - 5 + 'vmin';
+                   enm4.dataset.position = (enmpos4 - 20) + "p";
+               }
+               else if (enmdir4 === "idb4") {
+                   enm4.style.top = parseInt(enm4.style.top) + 5 + 'vmin';
+                   enm4.dataset.position = (enmpos4 + 20) + "p";
+               }
+            }
+
+            else {
+              direction4 = 0;
+              while (direction4 === 0) {
+              selected4 = Math.floor(Math.random() * 4);
+              direction4 = eval(enmmov4 [selected4]);
+              if (enmdir4 === "idl4" && enmmov4 [selected4] === "idr4") {direction4 = 0}
+              if (enmdir4 === "idr4" && enmmov4 [selected4] === "idl4") {direction4 = 0}
+              if (enmdir4 === "idt4" && enmmov4 [selected4] === "idb4") {direction4 = 0}
+              if (enmdir4 === "idb4" && enmmov4 [selected4] === "idt4") {direction4 = 0}
+              change = 1
+              }
+              if (change === 1) {enmdir4 = enmmov4 [selected4]; change = 0;}
+              if (enmdir4 === "idl4") {
+                  enm4.style.left = parseInt(enm4.style.left) - 5 + 'vmin';
+                  enm4.dataset.position = (enmpos4 - 1) + "p";
+              }
+              else if (enmdir4 === "idr4") {
+                  enm4.style.left = parseInt(enm4.style.left) + 5 + 'vmin';
+                  enm4.dataset.position = (enmpos4 + 1) + "p";
+              }
+              else if (enmdir4 === "idt4") {
+                  enm4.style.top = parseInt(enm4.style.top) - 5 + 'vmin';
+                  enm4.dataset.position = (enmpos4 - 20) + "p";
+              }
+              else if (enmdir4 === "idb4") {
+                  enm4.style.top = parseInt(enm4.style.top) + 5 + 'vmin';
+                  enm4.dataset.position = (enmpos4 + 20) + "p";
+              }
+            }
+
+            enmpos1 = parseInt(enm1.getAttribute('data-position'));
+            enmpos2 = parseInt(enm2.getAttribute('data-position'));
+            enmpos3 = parseInt(enm3.getAttribute('data-position'));
+            enmpos4 = parseInt(enm4.getAttribute('data-position'));
+
+            if (position === enmpos1) {
+                if (enmkey1 === "yes") {
+                    enm1.className = "tile enemy-1"; 
+                    enm1.dataset.position = "379enm"; 
+                    enm1.style.left = "90vmin";
+                    enm1.style.top = "90vmin";
+                    lock1 = "open"
+                    enmkey1 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+            if (position === enmpos2) {
+                if (enmkey2 === "yes") {
+                    enm2.className = "tile enemy-2"; 
+                    enm2.dataset.position = "379enm"; 
+                    enm2.style.left = "90vmin";
+                    enm2.style.top = "90vmin";
+                    lock2 = "open"
+                    enmkey2 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+            if (position === enmpos3) {
+                if (enmkey3 === "yes") {
+                    enm3.className = "tile enemy-3"; 
+                    enm3.dataset.position = "379enm"; 
+                    enm3.style.left = "90vmin";
+                    enm3.style.top = "90vmin";
+                    lock3 = "open"
+                    enmkey3 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+            if (position === enmpos4) {
+                if (enmkey4 === "yes") {
+                    enm4.className = "tile enemy-4"; 
+                    enm4.dataset.position = "379enm"; 
+                    enm4.style.left = "90vmin";
+                    enm4.style.top = "90vmin";
+                    lock4 = "open"
+                    enmkey4 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+
+            document.getElementById("text2").innerHTML = 
+            "Enemy details" + "<br>"
+            + "newdir: " + newdir1 + "<br>"
+            + "enmdir: " + enmdir1 + "<br>"
+            + "direction: " + direction1;
+
+        }
+
+        if (true) {automove = setInterval(enemymovement, 1000)}
+
+        function keypress() {
+
+            //definitions:
+
+            element = document.getElementById("player");
+            position = parseInt(element.getAttribute('data-position'));
+            floortag = document.getElementById(currentfloor).getAttribute('data-tag');
+            floor = document.getElementById(currentfloor);
+            floorup = parseInt(currentfloor) + 1 + "fl";
+            floordown = parseInt(currentfloor) - 1 + "fl";
+            currenttile = document.getElementById(position + floortag);
+            enmpos1 = parseInt(enm1.getAttribute('data-position'));
+            enmpos2 = parseInt(enm2.getAttribute('data-position'));
+            enmpos3 = parseInt(enm3.getAttribute('data-position'));
+            enmpos4 = parseInt(enm4.getAttribute('data-position'));
+        
+            //playermovement:
+
+            if ((position - 1) % 20 != 0) {idl = position - 1; onleft = document.getElementById(idl + floortag);}
+            else {idl = 0; onleft = document.getElementById("end");}
+            if (position % 20 != 0) {idr = position + 1; onright = document.getElementById(idr + floortag);}
+            else {idr = 0; onright = document.getElementById("end");}
+            if ((position - 20) < 1) {idt = 0; ontop = document.getElementById("end");}
+            else {idt = position - 20; ontop = document.getElementById(idt + floortag);}
+            if ((position + 20) > 400) {idb = 0; onbottom = document.getElementById("end");}
+            else {idb = position + 20; onbottom = document.getElementById(idb + floortag);}
+    
+            if (blockedtiles.includes(onleft.className)) {idl = 0;}
+            if (blockedtiles.includes(onright.className)) {idr = 0;}
+            if (blockedtiles.includes(ontop.className)) {idt = 0;}
+            if (blockedtiles.includes(onbottom.className)) {idb = 0;}
+
+            //enemy1:
+
+            
+
+            //keypress:
+
+            if (event.keyCode === 65) {
+                if (idl !=0) {
+                    element.style.left = 
+                    parseInt(element.style.left) - 5 + 'vmin';
+                    element.dataset.position = (position - 1) + "p";
+                    document.removeEventListener("keydown", keypress);
+                    setTimeout(cooldown, cd)
+                }
+            }
+            else if (event.keyCode === 68) {
+                if(idr !=0) {
+                    element.style.left = 
+                    parseInt(element.style.left) + 5 + 'vmin';
+                    element.dataset.position = (position + 1) + "p";
+                    document.removeEventListener("keydown", keypress);
+                    setTimeout(cooldown, cd)
+                }
+            }
+            else if (event.keyCode === 87) {
+                if(idt !=0) {
+                    element.style.top = 
+                    parseInt(element.style.top) - 5 + 'vmin';
+                    element.dataset.position = (position - 20) + "p";
+                    document.removeEventListener("keydown", keypress);
+                    setTimeout(cooldown, cd)
+                }
+            }
+            else if (event.keyCode === 83) {
+                if (idb!=0) {
+                    element.style.top = 
+                    parseInt(element.style.top) + 5 + 'vmin';
+                    element.dataset.position = (position + 20) + "p";
+                    document.removeEventListener("keydown", keypress);
+                    setTimeout(cooldown, cd)
+                }
+            }
+            
+            //admin controls:
+            
+            if (event.keyCode === 80 && event.shiftKey) {enemymovement()}
+            
+            if (event.keyCode === 69 && event.shiftKey) {
+                if (typeof automove === "undefined") {automove = setInterval(enemymovement, 1000)}
+                else {clearInterval(automove);}
+            }
+
+            if (event.keyCode === 73 && event.shiftKey) {
+                if (document.getElementById("details").style.visibility === "hidden") {document.getElementById("details").style.visibility = "visible"}
+                else if (document.getElementById("details").style.visibility === "visible") {document.getElementById("details").style.visibility = "hidden"}
+            }
+            
+            if (event.keyCode === 76 && event.shiftKey) {
+                document.getElementById("130" + floortag).className = "tile lock";
+            }
+
+            //other
+            
+            if (event.keyCode === 38) {
+                if (currenttile.className === "tile stairs") {
+                    if (document.getElementById(floorup) != null) {
+                        floor.style.visibility = "hidden";
+                        currentfloor = floorup;
+                        document.getElementById(currentfloor).style.visibility = "visible";
+                        element.style.left = '0vmin';
+                        element.style.top = '0vmin';
+                        element.dataset.position = "1pl";
+                        redefine()
+                    }
+                }
+            }
+            else if (event.keyCode === 40) {
+                if (currenttile.className === "tile stairs") {
+                    if (document.getElementById(floordown) != null) {
+                        floor.style.visibility = "hidden";
+                        currentfloor = floordown;
+                        document.getElementById(currentfloor).style.visibility = "visible";
+                        element.style.left = '0vmin';
+                        element.style.top = '0vmin';
+                        element.dataset.position = "1pl";
+                        redefine()
+                    }
+                }
+            }
+
+            keypos1 = parseInt(key1.getAttribute('data-position'));
+            keypos2 = parseInt(key2.getAttribute('data-position'));
+            keypos3 = parseInt(key3.getAttribute('data-position'));
+            keypos4 = parseInt(key4.getAttribute('data-position'));
+
+            position = parseInt(element.getAttribute('data-position'));
+            enmpos1 = parseInt(enm1.getAttribute('data-position'));
+            enmpos2 = parseInt(enm2.getAttribute('data-position'));
+            enmpos3 = parseInt(enm3.getAttribute('data-position'));
+            enmpos4 = parseInt(enm4.getAttribute('data-position'));
+            
+            //enemy kill
+
+            if (lock1 === "closed") {
+                if (position === keypos1 && enmkey2 === "no" && enmkey3 === "no" && enmkey4 === "no") {
+                    enmkey1 = "yes"; key1.style.visibility = "hidden"
+                    enm1.className = "tile enemy-0"
+                }
+            }
+            if (lock2 === "closed") {
+                if (position === keypos2 && enmkey1 === "no" && enmkey3 === "no" && enmkey4 === "no") {
+                    enmkey2 = "yes"; key2.style.visibility = "hidden"
+                    enm2.className = "tile enemy-0"
+                }
+            }
+            if (lock3 === "closed") {
+                if (position === keypos3 && enmkey1 === "no" && enmkey2 === "no" && enmkey4 === "no") {
+                    enmkey3 = "yes"; key3.style.visibility = "hidden"
+                    enm3.className = "tile enemy-0"
+                }
+            }
+            if (lock4 === "closed") {
+                if (position === keypos4 && enmkey1 === "no" && enmkey2 === "no" && enmkey3 === "no") {
+                    enmkey4 = "yes"; key4.style.visibility = "hidden"
+                    enm4.className = "tile enemy-0"
+                }
+            }
+
+            if (position === enmpos1) {
+                if (enmkey1 === "yes") {
+                    enm1.className = "tile enemy-1"; 
+                    enm1.dataset.position = "379enm"; 
+                    enm1.style.left = "90vmin";
+                    enm1.style.top = "90vmin";
+                    lock1 = "open"
+                    enmkey1 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+            if (position === enmpos2) {
+                if (enmkey2 === "yes") {
+                    enm2.className = "tile enemy-2"; 
+                    enm2.dataset.position = "379enm"; 
+                    enm2.style.left = "90vmin";
+                    enm2.style.top = "90vmin";
+                    lock2 = "open"
+                    enmkey2 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+            if (position === enmpos3) {
+                if (enmkey3 === "yes") {
+                    enm3.className = "tile enemy-3"; 
+                    enm3.dataset.position = "379enm"; 
+                    enm3.style.left = "90vmin";
+                    enm3.style.top = "90vmin";
+                    lock3 = "open"
+                    enmkey3 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+            if (position === enmpos4) {
+                if (enmkey4 === "yes") {
+                    enm4.className = "tile enemy-4"; 
+                    enm4.dataset.position = "379enm"; 
+                    enm4.style.left = "90vmin";
+                    enm4.style.top = "90vmin";
+                    lock4 = "open"
+                    enmkey4 = "no"
+                }
+                else {
+                document.removeEventListener("keydown", keypress);
+                element.className = "character sad";
+                setTimeout(reset, 500);
+                }
+            }
+
+            if (lock1 === "open" && lock2 === "open" && lock3 === "open" && lock4 === "open") {
+                document.getElementById("130" + floortag).className = "tile lock"
+            }
+
+            if (position === 130) {lock5 = "open"; document.getElementById("130" + floortag).className = "tile unlock"}
+
+            if (lock5 === "open") {
+                document.getElementById("398" + floortag).className = "tile home"
+                document.getElementById("399" + floortag).className = "tile home"
+                document.getElementById("360" + floortag).className = "tile home"
+                document.getElementById("380" + floortag).className = "tile home"
+            }
+            else {
+                document.getElementById("398" + floortag).className = "tile wall"
+                document.getElementById("399" + floortag).className = "tile wall"
+                document.getElementById("360" + floortag).className = "tile wall"
+                document.getElementById("380" + floortag).className = "tile wall"
+            }
+
+            //redefinitions:
+
+            position = parseInt(element.getAttribute('data-position'));
+            
+            floortag = document.getElementById(currentfloor).getAttribute('data-tag');
+            floor = document.getElementById(currentfloor);
+            floorup = parseInt(currentfloor) + 1 + "fl";
+            floordown = parseInt(currentfloor) - 1 + "fl";
+            currenttile = document.getElementById(position + floortag);
+
+            idl = position - 1;
+            idr = position + 1;
+            idt = position - 20;
+            idb = position + 20;
+            if ((position - 1) % 20 != 0) {idl = position - 1; onleft = document.getElementById(idl + floortag);}
+            else {idl = 0; onleft = document.getElementById("end");}
+            if (position % 20 != 0) {idr = position + 1; onright = document.getElementById(idr + floortag);}
+            else {idr = 0; onright = document.getElementById("end");}
+            if ((position - 20) < 1) {idt = 0; ontop = document.getElementById("end");}
+            else {idt = position - 20; ontop = document.getElementById(idt + floortag);}
+            if ((position + 20) > 400) {idb = 0; onbottom = document.getElementById("end");}
+            else {idb = position + 20; onbottom = document.getElementById(idb + floortag);}
+
+            document.getElementById("text").innerHTML = 
+            "Details" + "<br>"
+            + "x: " + element.style.left + "<br>" 
+            + "y: " + element.style.top + "<br>" 
+            + "Keycode: " + event.keyCode + "<br>" 
+            + "Width: " +  element.width + "<br>" 
+            + "Height: " +  element.height + "<br>" 
+            + "Current tile: " + position + ", " + currenttile.className + "<br>"
+            + "Onleft: " + idl + ", " + onleft.className + "<br>" 
+            + "Onright: " + idr + ", " + onright.className + "<br>" 
+            + "Ontop: " + idt + ", " + ontop.className + "<br>" 
+            + "Onbottom: " + idb + ", " + onbottom.className + "<br>"
+            + "Floortag: " + floortag + "<br>"
+            + "Enemy pos: " + enmpos1 + "<br>"
+            + "Current floor: " + currentfloor + "<br>"
+            + "Window height: " + window.innerHeight + "<br>"
+            + "Window width: " + window.innerWidth + "<br>"
+            + "Align offset: " + alignoffset + "<br>"
+            + "enmkey1: " + enmkey1 + "<br>"
+            + "enmkey2: " + enmkey2 + "<br>"
+            + "enmkey3: " + enmkey3 + "<br>"
+            + "enmkey4: " + enmkey4 + "<br>"
+            + "lock1: " + lock1 + "<br>"
+            + "lock2: " + lock2 + "<br>"
+            + "lock3: " + lock3 + "<br>"
+            + "lock4: " + lock4 + "<br>"
+            + "lock5: " + lock5 + "<br>";
+        };
+        
+
+
+        function resize() {
+            if (window.innerWidth > window.innerHeight) {
+                div = document.getElementById("container");
+                alignoffset = (window.innerWidth - window.innerHeight) / 2;
+                div.style.top = "0px";
+                div.style.left = alignoffset + "px";
+            }
+
+            if (window.innerHeight > window.innerWidth) {
+                div = document.getElementById("container");
+                alignoffset = (window.innerHeight - window.innerWidth) / 2;
+                div.style.left = "0px";
+                div.style.top = alignoffset + "px";
+            }
+        };
+
+        document.addEventListener("keydown", keypress);
+        window.addEventListener("resize", resize);
+
+    </script>
+
+</html>
